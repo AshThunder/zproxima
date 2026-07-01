@@ -34,7 +34,8 @@
     {
       "matches": [
         "http://localhost:5174/*",
-        "http://127.0.0.1:5174/*"
+        "http://127.0.0.1:5174/*",
+        "https://zproxima.vercel.app/*"
       ],
       "js": ["src/companionRelay.ts"],
       "run_at": "document_start"
@@ -43,7 +44,8 @@
   "externally_connectable": {
     "matches": [
       "http://localhost:5174/*",
-      "http://127.0.0.1:5174/*"
+      "http://127.0.0.1:5174/*",
+      "https://zproxima.vercel.app/*"
     ]
   },
   "web_accessible_resources": [
@@ -60,6 +62,7 @@
   "host_permissions": [
     "http://localhost:5174/*",
     "http://127.0.0.1:5174/*",
+    "https://zproxima.vercel.app/*",
     "https://api.coingecko.com/*",
     "https://ethereum-sepolia-rpc.publicnode.com/*",
     "https://ethereum-rpc.publicnode.com/*",
@@ -76,6 +79,6 @@
     "value": "same-origin"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' http://localhost:5174 http://127.0.0.1:5174 https://api.coingecko.com https://ethereum-sepolia-rpc.publicnode.com https://ethereum-rpc.publicnode.com https://relayer.testnet.zama.org https://relayer.mainnet.zama.org https://cdn.zama.org https://*.amazonaws.com https://*.zama.org https://fonts.googleapis.com https://fonts.gstatic.com"
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' http://localhost:5174 http://127.0.0.1:5174 https://zproxima.vercel.app https://api.coingecko.com https://ethereum-sepolia-rpc.publicnode.com https://ethereum-rpc.publicnode.com https://relayer.testnet.zama.org https://relayer.mainnet.zama.org https://cdn.zama.org https://*.amazonaws.com https://*.zama.org https://fonts.googleapis.com https://fonts.gstatic.com"
   }
 }
