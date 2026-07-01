@@ -1,0 +1,81 @@
+{
+  "manifest_version": 3,
+  "name": "Zproxima",
+  "version": "1.0.0",
+  "description": "A confidential registry always by your side. Browse ERC-20 to ERC-7984 wrappers, wrap/unwrap, decrypt balances, faucet claims, and ZBot assistant.",
+  "icons": {
+    "16": "public/icons/icon-16.png",
+    "32": "public/icons/icon-32.png",
+    "48": "public/icons/icon-48.png",
+    "128": "public/icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Zproxima",
+    "default_icon": {
+      "16": "public/icons/icon-16.png",
+      "32": "public/icons/icon-32.png",
+      "48": "public/icons/icon-48.png",
+      "128": "public/icons/icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.ts",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "permissions": [
+    "storage",
+    "sidePanel",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:5174/*",
+        "http://127.0.0.1:5174/*"
+      ],
+      "js": ["src/companionRelay.ts"],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:5174/*",
+      "http://127.0.0.1:5174/*"
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "relayer-sdk.worker.js",
+        "relayer-sdk-js.umd.js",
+        "tfhe_bg.wasm",
+        "kms_lib_bg.wasm"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "host_permissions": [
+    "http://localhost:5174/*",
+    "http://127.0.0.1:5174/*",
+    "https://api.coingecko.com/*",
+    "https://ethereum-sepolia-rpc.publicnode.com/*",
+    "https://ethereum-rpc.publicnode.com/*",
+    "https://relayer.testnet.zama.org/*",
+    "https://relayer.mainnet.zama.org/*",
+    "https://cdn.zama.org/*",
+    "https://*.amazonaws.com/*",
+    "https://*.zama.org/*"
+  ],
+  "cross_origin_embedder_policy": {
+    "value": "require-corp"
+  },
+  "cross_origin_opener_policy": {
+    "value": "same-origin"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' http://localhost:5174 http://127.0.0.1:5174 https://api.coingecko.com https://ethereum-sepolia-rpc.publicnode.com https://ethereum-rpc.publicnode.com https://relayer.testnet.zama.org https://relayer.mainnet.zama.org https://cdn.zama.org https://*.amazonaws.com https://*.zama.org https://fonts.googleapis.com https://fonts.gstatic.com"
+  }
+}

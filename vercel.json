@@ -1,0 +1,23 @@
+{
+  "outputDirectory": "companion-dist",
+  "rewrites": [
+    {
+      "source": "/api/relayer/11155111/:path*",
+      "destination": "https://relayer.testnet.zama.org/v2/:path*"
+    },
+    {
+      "source": "/api/relayer/1/:path*",
+      "destination": "https://relayer.mainnet.zama.org/v2/:path*"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+        { "key": "Cross-Origin-Embedder-Policy", "value": "credentialless" }
+      ]
+    }
+  ]
+}
