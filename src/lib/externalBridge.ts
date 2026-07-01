@@ -38,9 +38,15 @@ import { STORAGE_KEYS } from './storageKeys';
 const BRIDGE_KEY = STORAGE_KEYS.externalBridge;
 
 export function getCompanionBaseUrl(): string {
+  try {
+    const saved = localStorage.getItem('zproxima_custom_companion_url');
+    if (saved) return saved.trim().replace(/\/$/, '');
+  } catch {
+    // ignore
+  }
   return (
     import.meta.env.VITE_COMPANION_URL?.trim() ||
-    'http://localhost:5174'
+    'https://zproxima.vercel.app'
   ).replace(/\/$/, '');
 }
 

@@ -2,9 +2,9 @@
 
 A confidential registry that is always by your side and one click away. Production-ready dApp for the [Zama Wrappers Registry](https://docs.zama.org/protocol/sdk/getting-started/quick-start). Browse official ERC-20 ↔ ERC-7984 pairs on Sepolia and Mainnet, wrap and unwrap, decrypt confidential balances (including arbitrary ERC-7984 tokens), and claim Sepolia testnet faucet tokens.
 
-**Live web app:** Deploy `companion-dist/` to any static host (see [Deploy the web dApp](#deploy-the-web-dapp)). Set `VITE_COMPANION_URL` to your production URL before building.
+**Live web app:** Available at [https://zproxima.vercel.app](https://zproxima.vercel.app). See [Deploy the web dApp](#deploy-the-web-dapp) for custom deployments.
 
-**Chrome extension:** Optional side-panel wallet with built-in vault or browser wallet bridge.
+**Chrome extension:** Optional side-panel wallet with built-in vault or browser wallet bridge (supports switching between live, local, and custom companion dApps).
 
 **Upgrading from ZRegister:** On first launch after updating, stored vault data, activity, decrypted balances, and preferences are migrated automatically from `zregister_*` keys to `zproxima_*`. Reload the extension once after the update.
 
@@ -168,7 +168,7 @@ See `.env.example` (baked in at build time):
 
 | Variable | Purpose |
 |----------|---------|
-| `VITE_COMPANION_URL` | Public URL of the web dApp (extension bridge + build metadata) |
+| `VITE_COMPANION_URL` | Public URL of the web dApp. Default is `https://zproxima.vercel.app`. The extension includes a dynamic URL selector in the External Connect screen to easily switch between Production, Local Dev (`http://localhost:5174`), or any custom URL. |
 | `VITE_RELAYER_API_KEY` | Mainnet relayer auth |
 | `VITE_RELAYER_PROXY_URL_MAINNET` | Optional mainnet relayer proxy |
 | `VITE_SEPOLIA_RPC_URL` | Optional Sepolia RPC override |

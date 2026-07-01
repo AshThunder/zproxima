@@ -20,8 +20,51 @@ export default function ExternalConnectScreen({ onConnected, onUseEmbedded }: Pr
   const [companionUp, setCompanionUp] = useState<boolean | null>(null);
   const companionUrl = getCompanionBaseUrl();
 
+  const [urlMode, setUrlMode] = useState<'live' | 'local' | 'custom'>(() => {
+    try {
+      const saved = localStorage.getItem('zproxima_custom_companion_url') || '';
+      if (!saved) return 'live';
+      if (saved.includes('localhost') || saved.includes('127.0.0.1')) return 'local';
+      return 'custom';
+    } catch {
+      return 'live';
+    }
+  });
+
+  const [customUrl, setCustomUrl] = useState(() => {
+    try {
+      return localStorage.getItem('zproxima_custom_companion_url') || 'https://zproxima.vercel.app';
+    } catch {
+      return 'https://zproxima.vercel.app';
+    }
+  });
+
   const probeCompanion = async () => {
-    setCompanionUp(await checkCompanionReachable());
+    setCompanionUp(null);
+    const up = await checkCompanionReachable();
+    setCompanionUp(up);
+  };
+
+  const updateCompanionUrl = (mode: 'live' | 'local' | 'custom', customVal?: string) => {
+    setUrlMode(mode);
+    let url = 'https://zproxima.vercel.app';
+    if (mode === 'local') {
+      url = 'http://localhost:5174';
+    } else if (mode === 'custom') {
+      url = customVal || customUrl;
+    }
+
+    try {
+      if (mode === 'live') {
+        localStorage.removeItem('zproxima_custom_companion_url');
+      } else {
+        localStorage.setItem('zproxima_custom_companion_url', url);
+      }
+    } catch {
+      // ignore
+    }
+
+    void probeCompanion();
   };
 
   useEffect(() => {
@@ -36,7 +79,7 @@ export default function ExternalConnectScreen({ onConnected, onUseEmbedded }: Pr
       setCompanionUp(up);
       if (!up) {
         setError(
-          `Companion not reachable at ${companionUrl}. Run: npm run build && npm run serve:companion`,
+          `Companion not reachable at ${companionUrl}. Make sure the target is running/online.`,
         );
         return;
       }
@@ -62,6 +105,58 @@ export default function ExternalConnectScreen({ onConnected, onUseEmbedded }: Pr
             Use a browser wallet in a companion tab. {APP_NAME} keeps your registry view,
             activity history, and balances in the side panel.
           </p>
+        </div>
+
+        <div className="card card-padded" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <strong style={{ fontSize: 14 }}>Companion Target URL</strong>
+
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button
+              type="button"
+              className={urlMode === 'live' ? 'btn-primary' : 'btn-secondary'}
+              style={{ flex: 1, padding: '8px 4px', fontSize: 12 }}
+              onClick={() => updateCompanionUrl('live')}
+            >
+              Production
+            </button>
+            <button
+              type="button"
+              className={urlMode === 'local' ? 'btn-primary' : 'btn-secondary'}
+              style={{ flex: 1, padding: '8px 4px', fontSize: 12 }}
+              onClick={() => updateCompanionUrl('local')}
+            >
+              Local Dev
+            </button>
+            <button
+              type="button"
+              className={urlMode === 'custom' ? 'btn-primary' : 'btn-secondary'}
+              style={{ flex: 1, padding: '8px 4px', fontSize: 12 }}
+              onClick={() => updateCompanionUrl('custom')}
+            >
+              Custom
+            </button>
+          </div>
+
+          {urlMode === 'custom' && (
+            <input
+              type="text"
+              style={{
+                fontSize: 13,
+                padding: '8px 12px',
+                background: 'var(--bg-container-high)',
+                border: '1px solid var(--border-strong)',
+                borderRadius: 'var(--r-md)',
+                color: 'var(--text-primary)',
+                outline: 'none',
+              }}
+              value={customUrl}
+              placeholder="https://..."
+              onChange={(e) => {
+                setCustomUrl(e.target.value);
+                updateCompanionUrl('custom', e.target.value);
+              }}
+            />
+          )}
         </div>
 
         {companionUp === false && (
