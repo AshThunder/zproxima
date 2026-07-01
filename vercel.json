@@ -2,6 +2,14 @@
   "outputDirectory": "companion-dist",
   "rewrites": [
     {
+      "source": "/api/rpc/11155111",
+      "destination": "https://ethereum-sepolia-rpc.publicnode.com"
+    },
+    {
+      "source": "/api/rpc/1",
+      "destination": "https://ethereum-rpc.publicnode.com"
+    },
+    {
       "source": "/api/relayer/11155111/:path*",
       "destination": "https://relayer.testnet.zama.org/v2/:path*"
     },

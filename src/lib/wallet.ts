@@ -1,5 +1,6 @@
 import { ethers, Wallet } from 'ethers';
 import { sepolia, mainnet } from '@zama-fhe/sdk/chains';
+import { resolveRpcUrl } from './relayer';
 
 export interface NetworkConfig {
   id: 'sepolia' | 'mainnet';
@@ -81,7 +82,8 @@ export function restoreFromMnemonic(mnemonic: string) {
 
 export function getProvider(): ethers.JsonRpcProvider {
   const network = getActiveNetwork();
-  return new ethers.JsonRpcProvider(network.rpc, {
+  const rpcUrl = resolveRpcUrl(network.chainId, network.rpc);
+  return new ethers.JsonRpcProvider(rpcUrl, {
     chainId: network.chainId,
     name: network.name,
   });

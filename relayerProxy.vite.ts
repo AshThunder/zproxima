@@ -1,5 +1,17 @@
 /** Vite dev/preview proxy — same-origin relayer for browser FHE worker (see @zama-fhe/sdk README). */
 export const relayerDevProxy = {
+  '/api/rpc/11155111': {
+    target: 'https://ethereum-sepolia-rpc.publicnode.com',
+    changeOrigin: true,
+    secure: true,
+    rewrite: (path: string) => path.replace(/^\/api\/rpc\/11155111/, ''),
+  },
+  '/api/rpc/1': {
+    target: 'https://ethereum-rpc.publicnode.com',
+    changeOrigin: true,
+    secure: true,
+    rewrite: (path: string) => path.replace(/^\/api\/rpc\/1/, ''),
+  },
   '/api/relayer/11155111': {
     target: 'https://relayer.testnet.zama.org',
     changeOrigin: true,
