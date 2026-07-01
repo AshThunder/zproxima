@@ -2,7 +2,13 @@ import { sepolia, mainnet } from '@zama-fhe/sdk/chains';
 import type { FheChain } from '@zama-fhe/sdk/chains';
 
 function isExtensionContext(): boolean {
-  return typeof chrome !== 'undefined' && !!chrome.runtime?.id;
+  if (typeof window !== 'undefined') {
+    return window.location.protocol === 'chrome-extension:';
+  }
+  if (typeof self !== 'undefined') {
+    return (self.location?.protocol ?? '') === 'chrome-extension:';
+  }
+  return false;
 }
 
 /**
