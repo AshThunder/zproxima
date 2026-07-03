@@ -17,6 +17,10 @@
       "source": "/api/relayer/1/:path*",
       "destination": "https://relayer.mainnet.zama.org/v2/:path*"
     },
+    {
+      "source": "/privacy.html",
+      "destination": "/privacy.html"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
