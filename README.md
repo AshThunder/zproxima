@@ -4,7 +4,7 @@ A confidential registry that is always by your side and one click away. Producti
 
 **Live web app:** Available at [https://zproxima.vercel.app](https://zproxima.vercel.app). See [Deploy the web dApp](#deploy-the-web-dapp) for custom deployments.
 
-**Chrome extension:** Optional side-panel wallet with built-in vault or browser wallet bridge (supports switching between live, local, and custom companion dApps).
+**Chrome extension:** [Install from the Chrome Web Store](https://chromewebstore.google.com/detail/zproxima/clfdehbcopecdjfomjdngopogmdhodcc) — An optional side-panel wallet with built-in vault or browser wallet bridge (supports switching between live, local, and custom companion dApps).
 
 **Upgrading from ZRegister:** On first launch after updating, stored vault data, activity, decrypted balances, and preferences are migrated automatically from `zregister_*` keys to `zproxima_*`. Reload the extension once after the update.
 
@@ -133,7 +133,7 @@ npm run build
 npm run serve:companion   # http://localhost:5174
 ```
 
-Connect your browser wallet on Sepolia → browse registry → claim faucet → wrap → decrypt → unwrap.
+Connect your wallet on Sepolia → browse registry → claim faucet → wrap → decrypt → unwrap.
 
 ### Chrome extension (optional)
 
