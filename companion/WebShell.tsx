@@ -101,6 +101,16 @@ export default function WebShell({
               <span className="material-symbols-outlined">menu_book</span>
               Guide & Docs
             </button>
+            <a
+              href="https://chromewebstore.google.com/detail/zproxima/clfdehbcopecdjfomjdngopogmdhodcc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="web-sidebar-link"
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <span className="material-symbols-outlined">extension</span>
+              Get Extension
+            </a>
           </nav>
           <div className="web-sidebar-footer">
             <div className="web-wallet-chip">

@@ -259,7 +259,7 @@ export default function ConnectLanding({
             </p>
 
             <a
-              href="https://chromewebstore.google.com/"
+              href="https://chromewebstore.google.com/detail/zproxima/clfdehbcopecdjfomjdngopogmdhodcc"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary web-connect-panel-cta web-connect-panel-cta-main"
